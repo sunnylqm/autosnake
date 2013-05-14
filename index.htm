@@ -6,30 +6,29 @@
     <title>Auto Snake by sunnylqm</title>
     <style>
         #canvas{
-            width:300px;
-            height:300px;
             border:2px solid #000;
             margin:10px 0;
-            display: block;
         }
         button{
             display: inline-block;
             height:30px;
             width:80px;
-            margin:0 50px 10px 0;
+            margin:0 110px 20px;
         }
     </style>
 </head>
 <body>
 <header>Auto Snake</header>
-<canvas id="canvas">请使用Firefox或Chrome进行浏览</canvas>
+<canvas id="canvas" width=300 height=300>请使用Firefox或Chrome进行浏览</canvas>
 <button id="playOrPause">Play</button>
-<button id="stop">Stop</button>
 <footer>
     by <a href="http://weibo.com/sunnylqm">sunnylqm</a>
 </footer>
+<script src="js/keymaster.min.js"></script>
+<script src="js/gameConf.js"></script>
 <script src="js/snake.js"></script>
 <script src="js/ground.js"></script>
 <script src="js/init.js"></script>
+<script src="js/painter.js"></script>
 </body>
 </html>

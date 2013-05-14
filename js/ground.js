@@ -1,15 +1,14 @@
 (function(window){
-    var Ground = function(size,snake){
+    var gameConf = window.gameConf;
+    var Ground = function(){
         var me = this;
-        me.size = size;
-        me.snake = snake;
-        me.snake.ground = me;
-        me.matrix = new Array(size);
-        for(var i=0;i<size;i++){
-            me.matrix[i] = new Array(size);
-            for(var j=0;j<size;j++){
+        me.size = gameConf.GROUNDSIZE;
+        me.matrix = new Array(me.size);
+        for(var i=0;i<me.size;i++){
+            me.matrix[i] = new Array(me.size);
+            for(var j=0;j<me.size;j++){
                 me.matrix[i][j] = 0;
-                if(i===0&&j<snake.length){
+                if(i===0 && j< gameConf.SNAKESIZE){
                     me.matrix[i][j] = 1;
                 }
             }
