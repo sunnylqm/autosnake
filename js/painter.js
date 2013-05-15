@@ -50,7 +50,9 @@
             }
         },
         drawFruit: function(){
-
+            var w,h;
+            w = h = gameConf.TILESIZE;
+            ctx.fillRect(g.fruit.x * w, g.fruit.y * h,w,h);
         }
     };
 

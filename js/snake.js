@@ -6,37 +6,49 @@
    Snake.prototype = {
        move:function(){
            var me = this;
+           var f = window.ground.fruit;
            var head = me.body[0];
-           me.lastNode.x = me.body[me.length-1].x;
-           me.lastNode.y = me.body[me.length-1].y;
+           var tmpHead = {
+               x:head.x,
+               y:head.y
+           };
+           switch(me.dir){
+               case 'e':
+                   tmpHead.x++;
+                   break;
+               case 'w':
+                   tmpHead.x--;
+                   break;
+               case 'n':
+                   tmpHead.y--;
+                   break;
+               case 's':
+                   tmpHead.y++;
+                   break;
+           }
+           if(tmpHead.x === f.x && tmpHead.y === f.y){
+               me.grow(tmpHead);
+               return;
+           }
            for(var i = me.length - 1;i > 0;i--){
+               if(tmpHead.x === me.body[i-1].x && tmpHead.y === me.body[i-1].y){
+                   me.isAlive = false;
+               }
                me.body[i].x = me.body[i-1].x;
                me.body[i].y = me.body[i-1].y;
            }
-           switch(me.dir){
-               case 'e':
-                   head.x++;
-                   break;
-               case 'w':
-                   head.x--;
-                   break;
-               case 'n':
-                   head.y--;
-                   break;
-               case 's':
-                   head.y++;
-                   break;
-           }
+           head.x = tmpHead.x;
+           head.y = tmpHead.y;
            if(head.x < 0 || head.x >= gameConf.GROUNDSIZE || head.y < 0 || head.y >= gameConf.GROUNDSIZE ){
                me.isAlive = false;
-//               me.dispatchEvent(new CustomEvent("gameOver"));
            }
        },
-       grow:function(){
+       grow:function(fruit){
            var me = this;
+           var g = window.ground;
            me.length++;
-           me.body.push(me.lastNode);
-//           me.dispatchEvent(new CustomEvent("fruitEaten"));
+           me.body.unshift(fruit);
+           g.produceFruit();
        },
        turnTo:function(dir){
            var me = this;
@@ -66,7 +78,6 @@
                    y:0
                } ;
            }
-           me.lastNode = {};
            me.isAlive = true;
        }
 
