@@ -1,22 +1,12 @@
 (function(window){
    var gameConf = window.gameConf;
    var Snake = function(){
-       var me = this;
-       me.length = gameConf.SNAKESIZE;
-       me.dir = 'e';
-       me.body = new Array(me.length);
-       for(var i = 0;i < me.length;i++){
-           me.body[i] = {
-               x:me.length - 1 - i,
-               y:0
-           } ;
-       }
-       me.lastNode = {};
-       me.isAlive = true;
+       this.reset();
    };
    Snake.prototype = {
        move:function(){
            var me = this;
+           var head = me.body[0];
            me.lastNode.x = me.body[me.length-1].x;
            me.lastNode.y = me.body[me.length-1].y;
            for(var i = me.length - 1;i > 0;i--){
@@ -25,23 +15,28 @@
            }
            switch(me.dir){
                case 'e':
-                   me.body[0].x++;
+                   head.x++;
                    break;
                case 'w':
-                   me.body[0].x--;
+                   head.x--;
                    break;
                case 'n':
-                   me.body[0].y--;
+                   head.y--;
                    break;
                case 's':
-                   me.body[0].y++;
+                   head.y++;
                    break;
+           }
+           if(head.x < 0 || head.x >= gameConf.GROUNDSIZE || head.y < 0 || head.y >= gameConf.GROUNDSIZE ){
+               me.isAlive = false;
+//               me.dispatchEvent(new CustomEvent("gameOver"));
            }
        },
        grow:function(){
            var me = this;
            me.length++;
            me.body.push(me.lastNode);
+//           me.dispatchEvent(new CustomEvent("fruitEaten"));
        },
        turnTo:function(dir){
            var me = this;
@@ -59,12 +54,23 @@
                return ;
            }
            me.dir = dir;
+       },
+       reset:function(){
+           var me = this;
+           me.length = gameConf.SNAKESIZE;
+           me.dir = 'e';
+           me.body = new Array(me.length);
+           for(var i = 0;i < me.length;i++){
+               me.body[i] = {
+                   x:me.length - 1 - i,
+                   y:0
+               } ;
+           }
+           me.lastNode = {};
+           me.isAlive = true;
        }
 
    };
 
-
    window.Snake = Snake;
-
-
 })(this);

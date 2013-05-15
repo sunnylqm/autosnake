@@ -1,10 +1,19 @@
 (function(window){
 
+var gameConf,snake,ground;
+gameConf = window.gameConf;
+window.snake = snake = new window.Snake();
+window.ground = ground = new window.Ground();
+
 var playBtn = document.getElementById('playOrPause');
 playBtn.onclick = function(){
     var me = this;
     gameConf.isPlaying = !(gameConf.isPlaying);
     if(gameConf.isPlaying){
+        if(!snake.isAlive){
+            snake.reset();
+            ground.reset();
+        }
         Painter.drawScreen();
         me.innerHTML = 'Pause';
     }
@@ -31,10 +40,6 @@ key('right',function(){
     snake.turnTo('e');
 });
 
-var gameConf,snake,ground;
-gameConf = window.gameConf;
-window.snake = snake = new window.Snake();
-window.ground = ground = new window.Ground(snake);
 
 
 })(this);
