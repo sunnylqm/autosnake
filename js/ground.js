@@ -19,7 +19,7 @@
                 me.matrix[index] = temp;
                 index--;
             }
-            var rand = Math.round(Math.random()*1000)%(me.size-s.length);
+            var rand = Math.round(Math.random()*10000)%(me.size-s.length);
             me.fruit = {
                 x:Math.floor(rand/gameConf.GROUNDSIZE),
                 y:rand%gameConf.GROUNDSIZE

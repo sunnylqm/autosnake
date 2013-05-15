@@ -39,7 +39,9 @@ key('right',function(){
     gameConf.autoPlay = false;
     snake.turnTo('e');
 });
-
+key('enter,space',function(){
+    playBtn.click();
+});
 
 
 })(this);
