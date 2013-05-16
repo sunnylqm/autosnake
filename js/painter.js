@@ -21,6 +21,9 @@
                     ctx.fillStyle = '#000';
                     Painter.drawSnake();
                     Painter.drawFruit();
+                    if(gameConf.autoPlay){
+                        window.autoPlay();
+                    }
                     s.move();
                     window.setTimeout(Painter.drawScreen,1000/8);
                 }
@@ -31,7 +34,6 @@
                 }
 
             }
-
         },
         drawGameOverScreen: function(){
             ctx.fillStyle = "#000";
